@@ -5,7 +5,7 @@ function Navbar() {
 	return (
 		<div>
 			<header className="bg-blue-600">
-				<div className=" mx-auto flex justify-between">
+				<div className=" mx-auto flex justify-between container">
 					<nav className="flex">
 						<NavLink
 							to="/"

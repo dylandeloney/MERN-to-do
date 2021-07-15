@@ -1,0 +1,68 @@
+.container {
+	width: 80%;
+	margin: auto;
+}
+
+.form * {
+	box-sizing: border-box;
+	line-height: 1.5;
+}
+
+.formItem {
+	display: flex;
+	flex-direction: column;
+}
+
+.formItem > * {
+	align-self: flex-start;
+}
+
+.formInput {
+	-webkit-appearance: none;
+	width: 100%;
+	max-width: 450px;
+
+	/* Fix safari date fields */
+	min-height: calc(0.9em + (0.8em * 2) + 0.6em);
+
+	padding: 0.8em;
+	font-size: 0.9em;
+
+	outline: none;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	background: #f9f9f9;
+	transition: background 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.forminput: focus {
+	background: #ffffff;
+}
+
+.formInputError {
+	color: #d50000;
+	background: #fff8f8;
+	border-color: #d50000;
+}
+
+.formInputError:: placeholder {
+	color: #ffbfbf;
+}
+.formError {
+	padding-top: 10px;
+	color: #d50000;
+	font-size: 0.9em;
+	visibility: hidden;
+}
+
+.formInputError + .formError {
+	visibility: visible;
+}
+
+.formInputSmall {
+	max-width: 275px;
+}
+
+textarea.formInput {
+	min-height: 250px;
+}

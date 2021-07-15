@@ -1,0 +1,20 @@
+FIELDS NEEDED:
+Project name
+Importance (1-10)
+deadline
+lead
+description
+notes
+
+
+//SORT TASKS BY
+deadline
+created Date
+importance
+name
+lead
+
+//FORM VALIDATION AND SUBMISSION
+react-hook-form
+
+if wrong input on required add formInputError class (CSS) to required input

@@ -1,12 +1,15 @@
 import React from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Tasks() {
 	return (
-		<div className="bg-gray-50">
-			<button className="float-left bg-red-400 py-2 px-4 mx-2 my-2 rounded-md">
-				Create Task
-			</button>
+		<div className="">
+			<Link to="/create">
+				<button className="float-left bg-red-400 py-2 px-4 mx-2 my-2 rounded-md">
+					Create Task
+				</button>
+			</Link>
 			<table className="w-full  m-auto">
 				<tr className="bg-gray-500 py-2 my-2 text-xl">
 					<td>Project Title</td>

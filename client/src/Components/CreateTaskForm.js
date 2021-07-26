@@ -1,18 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
 function CreateTaskForm() {
+	const { register, handleSubmit } = useForm();
+	const onSubmit = (data) => console.log(data);
+
 	return (
 		<div>
 			<div className="container">
 				<h1 className="text-blue-400 text-5xl text-left mt-2">
 					Create a New Task
 				</h1>
-				<form className="bg-white rounded-lg mt-5" method="post">
+				<form
+					className="bg-white rounded-lg mt-5"
+					method="post"
+					onSubmit={handleSubmit(onSubmit)}>
 					<div className="formItem">
 						<label htmlFor="projectName" className="formLabel">
 							Task Name:
 						</label>
 						<input
+							{...register("projectName")}
 							type="text"
 							className="formInput "
 							name="projectName"
@@ -26,6 +35,7 @@ function CreateTaskForm() {
 							Importance:
 						</label>
 						<input
+							{...register("importance")}
 							min="1"
 							max="10"
 							type="number"
@@ -41,6 +51,7 @@ function CreateTaskForm() {
 							Deadline:
 						</label>
 						<input
+							{...register("deadline")}
 							type="date"
 							className="formInput  formInputSmall"
 							name="deadline"
@@ -54,6 +65,7 @@ function CreateTaskForm() {
 							Leader:
 						</label>
 						<input
+							{...register("lead")}
 							type="text"
 							className="formInput "
 							name="lead"
@@ -67,6 +79,7 @@ function CreateTaskForm() {
 							Description:
 						</label>
 						<textarea
+							{...register("description")}
 							name="description"
 							className="formInput"
 							placeholder="Enter a description of the task"></textarea>
@@ -77,19 +90,20 @@ function CreateTaskForm() {
 							Notes:
 						</label>
 						<textarea
+							{...register("notes")}
 							name="notes"
 							className="formInput"
 							placeholder="Enter any necessary notes related to the task"></textarea>
 					</div>
 
 					<div className="formItem">
-						<Link to="/tasks">
-							<button
-								className="formButton bg-green-400 py-4 px-8 my-4 rounded-md text-white text-8 font-semibold cursor-pointer"
-								type="submit">
-								Create
-							</button>
-						</Link>
+						{/* <Link to="/tasks"> */}
+						<button
+							className="formButton bg-green-400 py-4 px-8 my-4 rounded-md text-white text-8 font-semibold cursor-pointer"
+							type="submit">
+							Create
+						</button>
+						{/* </Link> */}
 					</div>
 				</form>
 			</div>

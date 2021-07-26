@@ -7,25 +7,29 @@ import CRM from "./Components/CRM";
 import Calendar from "./Components/Calendar.js";
 import Tasks from "./Components/Tasks";
 import CreateTaskForm from "./Components/CreateTaskForm";
+import { Provider } from "react-redux";
+import store from "./store";
 
 function App() {
 	return (
-		<div className="App">
-			<BrowserRouter>
-				<Navbar />
-				<div className="container">
-					{
-						<Switch>
-							<Route component={Home} path="/" exact />
-							<Route component={CRM} path="/crm" />
-							<Route component={Calendar} path="/calendar" />
-							<Route component={Tasks} path="/tasks" />
-							<Route component={CreateTaskForm} path="/create" />
-						</Switch>
-					}
-				</div>
-			</BrowserRouter>
-		</div>
+		<Provider store={store}>
+			<div className="App">
+				<BrowserRouter>
+					<Navbar />
+					<div className="container">
+						{
+							<Switch>
+								<Route component={Home} path="/" exact />
+								<Route component={CRM} path="/crm" />
+								<Route component={Calendar} path="/calendar" />
+								<Route component={Tasks} path="/tasks" />
+								<Route component={CreateTaskForm} path="/create" />
+							</Switch>
+						}
+					</div>
+				</BrowserRouter>
+			</div>
+		</Provider>
 	);
 }
 

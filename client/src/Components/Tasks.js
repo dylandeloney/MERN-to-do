@@ -1,8 +1,9 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { deleteTask } from "../Actions/taskActions";
+import CreateTaskForm from "./CreateTaskForm";
 
 function Tasks() {
 	const task = useSelector((state) => state.task.tasks);
@@ -14,12 +15,8 @@ function Tasks() {
 	};
 
 	return (
-		<div className="">
-			<Link to="/create">
-				<button className="float-left bg-red-400 py-2 px-4 mx-2 my-2 rounded-md">
-					Create Task
-				</button>
-			</Link>
+		<div>
+			<CreateTaskForm />
 			<table className="w-full  m-auto">
 				<thead>
 					<tr className="bg-gray-500 py-2 my-2 text-xl">

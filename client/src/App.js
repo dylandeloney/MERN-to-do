@@ -23,7 +23,6 @@ function App() {
 								<Route component={CRM} path="/crm" />
 								<Route component={Calendar} path="/calendar" />
 								<Route component={Tasks} path="/tasks" />
-								<Route component={CreateTaskForm} path="/create" />
 							</Switch>
 						}
 					</div>

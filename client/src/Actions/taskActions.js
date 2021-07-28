@@ -1,23 +1,33 @@
-import { GET_TASK, ADD_TASK, DELETE_TASK } from "./types";
+import axios from "axios";
+import { GET_TASK, ADD_TASK, DELETE_TASK, TASKS_LOADING } from "./types";
 
-export const getTasks = () => {
-	return {
-		type: GET_TASK,
-	};
+export const getTasks = () => (dispatch) => {
+	dispatch(setTasksLoading());
+	axios.get("/API/tasks").then((res) =>
+		dispatch({
+			type: GET_TASK,
+			payload: res.data,
+		})
+	);
 };
 
-export const deleteTask = (id) => {
-	return {
-		type: DELETE_TASK,
-		payload: id,
-	};
+export const addTask = (task) => (dispatch) => {
+	console.log("addTask triggered " + task);
+	axios.post("/API/tasks", task).then((res) =>
+		dispatch({
+			type: ADD_TASK,
+			payload: res.data,
+		})
+	);
 };
 
-export const addTask = (task) => {
-	return {
-		type: ADD_TASK,
-		payload: task,
-	};
+export const deleteTask = (id) => (dispatch) => {
+	axios.delete(`/API/tasks/${id}`).then((res) =>
+		dispatch({
+			type: DELETE_TASK,
+			payload: id,
+		})
+	);
 };
 
 export const setTasksLoading = () => {

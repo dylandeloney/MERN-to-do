@@ -4,7 +4,6 @@ import {
 	DELETE_TASK,
 	TASKS_LOADING,
 } from "../Actions/types";
-import { v4 as uuid } from "uuid";
 
 const initialState = {
 	tasks: [],
@@ -15,11 +14,13 @@ export default function (state = initialState, action) {
 		case GET_TASK:
 			return {
 				...state,
+				tasks: action.payload,
+				loading: false,
 			};
 		case DELETE_TASK:
 			return {
 				...state,
-				tasks: state.tasks.filter((task) => task.id !== action.payload),
+				tasks: state.tasks.filter((task) => task._id !== action.payload),
 			};
 		case ADD_TASK:
 			return {

@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 
 //Create Schema
 const TaskSchema = new Schema({
-	id: {
-		type: Number,
-		required: true,
-	},
 	name: {
 		type: String,
 		required: true,
@@ -18,7 +14,6 @@ const TaskSchema = new Schema({
 	deadline: {
 		type: Date,
 		required: true,
-		default: Date.now(),
 	},
 	lead: {
 		type: String,

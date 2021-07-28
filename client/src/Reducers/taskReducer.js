@@ -4,24 +4,10 @@ import {
 	DELETE_TASK,
 	TASKS_LOADING,
 } from "../Actions/types";
+import { v4 as uuid } from "uuid";
 
 const initialState = {
-	tasks: [
-		{
-			id: 0,
-			projectName: "Mailers",
-			importance: 7,
-			deadline: "01/01/2022",
-			lead: "Dylan",
-		},
-		{
-			id: 1,
-			projectName: "SEO",
-			importance: 8,
-			deadline: "06/09/2022",
-			lead: "Brittany",
-		},
-	],
+	tasks: [],
 	loading: false,
 };
 export default function (state = initialState, action) {
@@ -34,6 +20,16 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				tasks: state.tasks.filter((task) => task.id !== action.payload),
+			};
+		case ADD_TASK:
+			return {
+				...state,
+				tasks: [action.payload, ...state.tasks],
+			};
+		case TASKS_LOADING:
+			return {
+				...state,
+				loading: true,
 			};
 		default:
 			return state;

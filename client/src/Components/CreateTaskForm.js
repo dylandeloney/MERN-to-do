@@ -1,7 +1,9 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { addTask } from "../Actions/taskActions";
 import { ModalBody, Modal, ModalHeader } from "reactstrap";
+import { v4 as uuid } from "uuid";
 
 function CreateTaskForm() {
 	let [visible, setVisible] = useState(false);
@@ -11,7 +13,23 @@ function CreateTaskForm() {
 	};
 
 	const { register, handleSubmit } = useForm();
-	const onSubmit = (data) => console.log(data);
+	const dispatch = useDispatch();
+
+	const onSubmit = (e) => {
+		const newTask = {
+			id: uuid(),
+			projectName: e.projectName,
+			importance: e.importance,
+			deadline: e.deadline,
+			lead: e.lead,
+			description: e.description,
+			notes: e.notes,
+		};
+
+		dispatch(addTask(newTask));
+
+		toggle();
+	};
 
 	return (
 		<div>

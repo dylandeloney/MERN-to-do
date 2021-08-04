@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../../Middleware/auth");
 
 //Task Model
 const Task = require("../../Models/Task");
@@ -16,9 +17,9 @@ router.get("/", (req, res) => {
 
 //@route POST API/tasks
 //@desc Post a new task
-//@access Public
+//@access Private
 
-router.post("/", (req, res) => {
+router.post("/", auth, (req, res) => {
 	const newTask = new Task({
 		name: req.body.name,
 		importance: req.body.importance,
@@ -33,9 +34,9 @@ router.post("/", (req, res) => {
 
 //@route Delete API/tasks/:id
 //@desc Delete a task
-//@access Public
+//@access  private
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", auth, (req, res) => {
 	Task.findById(req.params.id)
 		.then((task) => task.remove().then(() => res.json({ success: true })))
 		.catch((err) => res.status(404).json({ sucess: false }));

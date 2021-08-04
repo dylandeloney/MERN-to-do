@@ -1,7 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import Logout from "./auth/Logout";
+import LoginModal from "./auth/LoginModal";
 
 function Navbar() {
+	const auth = useSelector((state) => state.auth);
+
 	return (
 		<div>
 			<header className="bg-blue-600">
@@ -33,6 +38,8 @@ function Navbar() {
 							Tasks
 						</NavLink>
 					</nav>
+					{auth.isAuthenticated ? <Logout /> : <LoginModal />}
+					{/* <RegisterModal /> */}
 				</div>
 			</header>
 		</div>

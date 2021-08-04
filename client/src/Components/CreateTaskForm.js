@@ -132,13 +132,11 @@ function CreateTaskForm() {
 						</div>
 
 						<div className="formItem">
-							{/* <Link to="/tasks"> */}
 							<button
 								className="formButton bg-green-400 py-4 px-8 my-4 rounded-md text-white text-8 font-semibold cursor-pointer"
 								type="submit">
 								Create
 							</button>
-							{/* </Link> */}
 						</div>
 					</form>
 				</ModalBody>

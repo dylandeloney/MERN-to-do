@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { ModalBody, Modal, ModalHeader, ModalFooter } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { ModalBody, Modal, ModalHeader, ModalFooter, Alert } from "reactstrap";
 import { clearErrors } from "../../Actions/errorActions";
+import { loginUser } from "../../Actions/authActions";
 import RegisterModal from "./RegisterModal";
 
 function LoginModal() {
@@ -19,8 +20,25 @@ function LoginModal() {
 
 	//Handle submission of login form
 	const onLoginSubmit = (e) => {
-		console.log(e);
+		const user = {
+			email: e.email,
+			password: e.password,
+		};
+
+		dispatch(loginUser(user));
 	};
+
+	//show error message
+	const error = useSelector((state) => state.error);
+	const auth = useSelector((state) => state.auth);
+
+	useEffect(() => {
+		if (visible === true) {
+			if (auth.isAuthenticated === true) {
+				toggle();
+			}
+		}
+	}, [error, auth]);
 
 	return (
 		//Create Login Modal form
@@ -37,6 +55,9 @@ function LoginModal() {
 					</h1>
 				</ModalHeader>
 				<ModalBody>
+					{error.msg.message ? (
+						<Alert color="danger">{error.msg.message}</Alert>
+					) : null}
 					<form
 						className="bg-white rounded-lg"
 						method="post"

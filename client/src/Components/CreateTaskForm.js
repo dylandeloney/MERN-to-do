@@ -23,7 +23,6 @@ function CreateTaskForm() {
 			description: e.description,
 			notes: e.notes,
 		};
-
 		dispatch(addTask(newTask));
 
 		toggle();

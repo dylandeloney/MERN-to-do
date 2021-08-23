@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../Actions/authActions";
 
 function Logout() {
-	const auth = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 	const onLogout = () => {
 		dispatch(logout());

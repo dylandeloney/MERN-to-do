@@ -53,11 +53,8 @@ function RegisterModal() {
 	const auth = useSelector((state) => state.auth);
 
 	useEffect(() => {
-		if (error.id !== "REGISTER_FAIL") {
-			error.msg.message = null;
-		}
-		if (nestedVisible == true) {
-			if (auth.isAuthenticated == true) {
+		if (nestedVisible === true) {
+			if (auth.isAuthenticated === true) {
 				toggleAll();
 			}
 		}

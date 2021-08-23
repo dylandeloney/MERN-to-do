@@ -28,7 +28,7 @@ router.post("/", auth, (req, res) => {
 		description: req.body.description,
 		notes: req.body.notes,
 	});
-
+	console.log(newTask);
 	newTask.save().then((task) => res.json(task));
 });
 

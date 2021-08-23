@@ -3,6 +3,7 @@ import {
 	ADD_TASK,
 	DELETE_TASK,
 	TASKS_LOADING,
+	CLEAR_TASKS,
 } from "../Actions/types";
 
 const initialState = {
@@ -31,6 +32,11 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				loading: true,
+			};
+		case CLEAR_TASKS:
+			return {
+				...state,
+				tasks: [],
 			};
 		default:
 			return state;

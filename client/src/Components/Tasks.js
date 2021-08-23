@@ -1,19 +1,24 @@
 import React, { useEffect } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTask, getTasks } from "../Actions/taskActions";
+import { deleteTask, getTasks, clearTasks } from "../Actions/taskActions";
 import CreateTaskForm from "./CreateTaskForm";
 
 const dayjs = require("dayjs");
 
 function Tasks() {
 	const dispatch = useDispatch();
+	const task = useSelector((state) => state.task.tasks);
+	const auth = useSelector((state) => state.auth);
 
 	useEffect(() => {
-		dispatch(getTasks());
-	}, []);
+		if (auth.isAuthenticated === true) {
+			dispatch(getTasks());
+		} else {
+			dispatch(clearTasks());
+		}
+	}, [auth]);
 
-	const task = useSelector((state) => state.task.tasks);
 	const onDeleteClick = (id) => {
 		setTimeout(() => {
 			dispatch(deleteTask(id));

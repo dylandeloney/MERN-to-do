@@ -9,10 +9,10 @@ import {
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
 
-export const getTasks = () => (dispatch) => {
+export const getTasks = (id) => (dispatch) => {
 	dispatch(setTasksLoading());
 	axios
-		.get("/API/tasks")
+		.get(`/API/tasks/${id}`)
 		.then((res) =>
 			dispatch({
 				type: GET_TASK,

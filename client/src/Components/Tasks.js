@@ -13,7 +13,7 @@ function Tasks() {
 
 	useEffect(() => {
 		if (auth.isAuthenticated === true) {
-			dispatch(getTasks());
+			dispatch(getTasks(auth.user.id));
 		} else {
 			dispatch(clearTasks());
 		}
@@ -33,6 +33,7 @@ function Tasks() {
 					<tr className="bg-gray-500 py-2 my-2 text-xl">
 						<td>Project Title</td>
 						<td>Importance</td>
+
 						<td>Deadline</td>
 						<td>Lead</td>
 						<td>Options</td>
@@ -43,7 +44,7 @@ function Tasks() {
 						<tr key={task._id}>
 							<td>{task.name}</td>
 							<td>{task.importance}</td>
-							<td>{dayjs(task.deadline).format("MM/DD/YYYY")}</td>
+							<td>{dayjs(task.deadline).add(1, "day").format("MM/DD/YYYY")}</td>
 							<td>{task.lead}</td>
 							<td>
 								<button className="justify-left border-2 border-gray-600 text-gray-600 bg-white rounded-md mr-1 px-2 py-2 my-2">

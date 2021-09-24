@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTask } from "../Actions/taskActions";
 import { ModalBody, Modal, ModalHeader } from "reactstrap";
 
 function CreateTaskForm() {
 	let [visible, setVisible] = useState(false);
+	const auth = useSelector((state) => state.auth);
 
 	const toggle = () => {
 		setVisible((visible = !visible));
@@ -22,7 +23,9 @@ function CreateTaskForm() {
 			lead: e.lead,
 			description: e.description,
 			notes: e.notes,
+			creator_id: auth.user.id,
 		};
+
 		dispatch(addTask(newTask));
 
 		toggle();

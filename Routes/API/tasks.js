@@ -9,8 +9,8 @@ const Task = require("../../Models/Task");
 //@desc Get All Items
 //@access Public
 
-router.get("/", (req, res) => {
-	Task.find()
+router.get("/:userid", (req, res) => {
+	Task.find({ creator_id: req.params.userid })
 		.sort({ date: -1 })
 		.then((tasks) => res.json(tasks));
 });
@@ -27,8 +27,8 @@ router.post("/", auth, (req, res) => {
 		lead: req.body.lead,
 		description: req.body.description,
 		notes: req.body.notes,
+		creator_id: req.body.creator_id,
 	});
-	console.log(newTask);
 	newTask.save().then((task) => res.json(task));
 });
 

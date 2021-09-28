@@ -32,12 +32,6 @@ function RegisterModal() {
 		setCloseAll(false);
 	};
 
-	const toggleAll = () => {
-		dispatch(clearErrors());
-		setNestedVisible(!nestedVisible);
-		setCloseAll(true);
-	};
-
 	//Handle submission of register form
 	const onRegisterSubmit = (e) => {
 		const newUser = {
@@ -53,12 +47,18 @@ function RegisterModal() {
 	const auth = useSelector((state) => state.auth);
 
 	useEffect(() => {
+		const toggleAll = () => {
+			dispatch(clearErrors());
+			setNestedVisible(!nestedVisible);
+			setCloseAll(true);
+		};
 		if (nestedVisible === true) {
 			if (auth.isAuthenticated === true) {
 				toggleAll();
 			}
 		}
-	}, [error, auth]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [error, auth, nestedVisible]);
 
 	return (
 		<div>

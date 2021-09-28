@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
 import CRM from "./Components/CRM";
-import Calendar from "./Components/Calendar.js";
+import TaskCalendar from "./Components/TaskCalendar.js";
 import Tasks from "./Components/Tasks";
 import { loadUser } from "./Actions/authActions";
 
@@ -15,6 +15,7 @@ function App() {
 
 	useEffect(() => {
 		dispatch(loadUser());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -27,7 +28,7 @@ function App() {
 						<Switch>
 							<Route component={Home} path="/" exact />
 							<Route component={CRM} path="/crm" />
-							<Route component={Calendar} path="/calendar" />
+							<Route component={TaskCalendar} path="/calendar" />
 							<Route component={Tasks} path="/tasks" />
 						</Switch>
 					}

@@ -38,7 +38,8 @@ function LoginModal() {
 				toggle();
 			}
 		}
-	}, [error, auth]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [error, auth, visible]);
 
 	return (
 		//Create Login Modal form

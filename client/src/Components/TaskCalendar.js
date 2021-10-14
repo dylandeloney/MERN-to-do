@@ -52,7 +52,6 @@ function TaskCalendar() {
 		return myEventsList;
 	};
 
-	console.log(getTaskList());
 	return (
 		<div>
 			<Calendar

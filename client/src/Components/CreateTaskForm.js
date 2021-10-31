@@ -59,8 +59,8 @@ function CreateTaskForm() {
 								className="formInput "
 								name="projectName"
 								placeholder="Enter the name of the task"
+								required={true}
 							/>
-							<span className="formError">A task name is required</span>
 						</div>
 
 						<div className="formItem">
@@ -75,10 +75,8 @@ function CreateTaskForm() {
 								className="formInput  formInputSmall"
 								name="importance"
 								placeholder="Enter the importance rating (1 - 10)"
+								required={true}
 							/>
-							<span className="formError">
-								An importance rating is required
-							</span>
 						</div>
 
 						<div className="formItem">
@@ -90,9 +88,9 @@ function CreateTaskForm() {
 								type="date"
 								className="formInput  formInputSmall"
 								name="deadline"
+								required={true}
 								placeholder="Enter a deadline for the task"
 							/>
-							<span className="formError">A deadline is required</span>
 						</div>
 
 						<div className="formItem">
@@ -105,10 +103,8 @@ function CreateTaskForm() {
 								className="formInput "
 								name="lead"
 								placeholder="Enter the name of the leader for this task"
+								required={true}
 							/>
-							<span className="formError">
-								A leader for the task is required
-							</span>
 						</div>
 
 						<div className="formItem">

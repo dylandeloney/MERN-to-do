@@ -52,7 +52,6 @@ function Tasks() {
 					<tr className="bg-gray-500 py-2 my-2 text-xl">
 						<td>Project Title</td>
 						<td>Importance</td>
-
 						<td>Deadline</td>
 						<td>Lead</td>
 						<td>Options</td>

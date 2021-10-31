@@ -44,7 +44,7 @@ export const addTask = (task) => (dispatch, getState) => {
 export const deleteTask = (id) => (dispatch, getState) => {
 	axios
 		.delete(`/API/tasks/${id}`, tokenConfig(getState))
-		.then((res) =>
+		.then(
 			dispatch({
 				type: DELETE_TASK,
 				payload: id,

@@ -13,7 +13,7 @@ const Task = require("../../Models/Task");
 router.get("/:userid", (req, res) => {
 	const objectID = mongoose.Types.ObjectId(req.params.userid);
 	Task.find({ creator_id: objectID })
-		.sort({ date: -1 })
+		.sort({ deadline: 1 })
 		.then((tasks) => res.json(tasks));
 });
 

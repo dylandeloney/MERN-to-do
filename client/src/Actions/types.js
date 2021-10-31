@@ -16,3 +16,6 @@ export const GET_ERRORS = "GET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const CLEAR_TASKS = "CLEAR_TASKS";
 export const CLEAR_CURRENT_TASK = "CLEAR_CURRENT_TASK";
+export const GET_CONTACTS = "GET_CONTACTS";
+export const ADD_CONTACT = "ADD_CONTACT";
+export const DELETE_CONTACT = "DELETE_CONTACT";

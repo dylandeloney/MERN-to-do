@@ -24,6 +24,7 @@ mongoose
 app.use("/API/tasks", require("./Routes/API/tasks"));
 app.use("/API/users", require("./Routes/API/users"));
 app.use("/API/auth", require("./Routes/API/auth"));
+app.use("/API/contacts", require("./Routes/API/contacts"));
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`));

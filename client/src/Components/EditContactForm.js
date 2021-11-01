@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { addContact } from "../Actions/contactActions";
-import { ModalBody, Modal, ModalHeader } from "reactstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { ModalBody } from "reactstrap";
+import { FaLock, FaLockOpen } from "react-icons/fa";
+import { editContact } from "../Actions/contactActions";
 
-function NewContactForm() {
-	let [visible, setVisible] = useState(false);
-
-	const toggle = () => {
-		setVisible((visible = !visible));
-	};
-
-	const { register, handleSubmit } = useForm();
+function EditContactForm() {
+	let [disabled, setDisabled] = useState(true);
+	const contact = useSelector((state) => state.contact.currentContact);
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
 
+	const editToggle = () => {
+		setDisabled((disabled = !disabled));
+	};
+
+	const { register, handleSubmit } = useForm();
+
 	const onSubmit = (e) => {
 		const newContact = {
+			_id: contact[0]._id,
 			firstName: e.firstName,
 			lastName: e.lastName,
 			email: e.email,
@@ -25,22 +28,24 @@ function NewContactForm() {
 			creator_id: auth.user.id,
 		};
 
-		dispatch(addContact(newContact));
-
-		toggle();
+		dispatch(editContact(newContact._id, newContact));
 	};
 
 	return (
 		<div>
-			<button
-				onClick={toggle}
-				className="float-left bg-red-400 py-2 px-4 mx-2 my-2 rounded-md">
-				New Contact
-			</button>
-			<Modal isOpen={visible} toggle={toggle}>
-				<ModalHeader toggle={toggle}>
-					<h1 className="text-blue-400 text-5xl text-left mt-2">New Contact</h1>
-				</ModalHeader>
+			<div
+				className="w-auto  px-2 border-solid border-b-2 pb-0"
+				style={{ padding: "0px !important" }}>
+				<h1 className=" justify-left text-blue-400 text-5xl text-left mt-2 inline-flex pr-24">
+					Contact Details
+				</h1>
+				<button
+					onClick={() => editToggle()}
+					className="jusity-right border-2 border-white bg-white rounded-md px-3  py-3 mt-0 inline-flex">
+					<span>{disabled ? <FaLock /> : <FaLockOpen />}</span>
+				</button>
+			</div>
+			{contact.map((contact) => (
 				<ModalBody>
 					<form
 						className="bg-white rounded-lg"
@@ -55,10 +60,10 @@ function NewContactForm() {
 								type="text"
 								className="formInput formInputSmall"
 								name="firstName"
-								placeholder="Enter your contact's first name"
+								defaultValue={contact.firstName}
 								required={true}
+								disabled={disabled}
 							/>
-							{/* <span className="formError">A first name is required</span> */}
 						</div>
 
 						<div className="formItem">
@@ -72,10 +77,10 @@ function NewContactForm() {
 								type="text"
 								className="formInput  formInputSmall"
 								name="lastName"
-								placeholder="Enter your contact's last name"
+								defaultValue={contact.lastName}
 								required={true}
+								disabled={disabled}
 							/>
-							<span className="formError">A last name is required </span>
 						</div>
 
 						<div className="formItem">
@@ -87,7 +92,8 @@ function NewContactForm() {
 								type="text"
 								className="formInput "
 								name="email"
-								placeholder="Enter your contact's email address"
+								defaultValue={contact.email}
+								disabled={disabled}
 							/>
 						</div>
 
@@ -100,7 +106,8 @@ function NewContactForm() {
 								type="text"
 								className="formInput "
 								name="phoneNumber"
-								placeholder="Enter your contact's phone number"
+								defaultValue={contact.phoneNumber}
+								disabled={disabled}
 							/>
 						</div>
 						<div className="formItem">
@@ -112,23 +119,27 @@ function NewContactForm() {
 								type="text"
 								className="formInput "
 								name="occupation"
-								placeholder="Enter your contact's occupation"
+								defaultValue={contact.occupation}
 								required={true}
+								disabled={disabled}
 							/>
 						</div>
 
 						<div className="formItem">
-							<button
-								className="formButton bg-green-400 py-4 px-8 my-4 rounded-md text-white text-8 font-semibold cursor-pointer"
-								type="submit">
-								Create
-							</button>
+							{disabled ? null : (
+								<button
+									className="formButton bg-green-400 py-4 px-8 my-4 rounded-md text-white text-8 font-semibold cursor-pointer"
+									type="submit">
+									{" "}
+									Update
+								</button>
+							)}
 						</div>
 					</form>
 				</ModalBody>
-			</Modal>
+			))}
 		</div>
 	);
 }
 
-export default NewContactForm;
+export default EditContactForm;

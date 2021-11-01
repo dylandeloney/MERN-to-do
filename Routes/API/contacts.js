@@ -41,4 +41,27 @@ router.delete("/:id", (req, res) => {
 		.catch((err) => res.status(404).json({ sucess: false }));
 });
 
+router.get("/view/:id", (req, res) => {
+	Contact.findById(req.params.id).then((contact) => res.json(contact));
+});
+
+router.post("/view/:id", (req, res) => {
+	Contact.findByIdAndUpdate(
+		req.body._id,
+		{
+			_id: req.body._id,
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			email: req.body.email,
+			phoneNumber: req.body.phoneNumber,
+			lastContact: req.body.lastContact,
+			occupation: req.body.occupation,
+			creator_id: req.body.creator_id,
+		},
+		{ new: true, useFindAndModify: false }
+	)
+		.then((contact) => res.json(contact))
+		.catch((err) => res.status(500).json({ success: false }));
+});
+
 module.exports = router;

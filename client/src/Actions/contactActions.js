@@ -1,5 +1,13 @@
 import axios from "axios";
-import { GET_CONTACTS, ADD_CONTACT, DELETE_CONTACT } from "./types";
+import {
+	GET_CONTACTS,
+	ADD_CONTACT,
+	DELETE_CONTACT,
+	GET_SINGLE_CONTACT,
+	CLEAR_CURRENT_CONTACT,
+	EDIT_CONTACT,
+	CLEAR_CONTACTS,
+} from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
 
@@ -43,4 +51,44 @@ export const deleteContact = (id) => (dispatch) => {
 		.catch((err) =>
 			dispatch(returnErrors(err.response.data, err.response.status))
 		);
+};
+
+export const getSingleContact = (id) => (dispatch) => {
+	axios
+		.get(`/API/contacts/view/${id}`)
+		.then((res) =>
+			dispatch({
+				type: GET_SINGLE_CONTACT,
+				payload: res.data,
+			})
+		)
+		.catch((err) =>
+			dispatch(returnErrors(err.response.data, err.response.status))
+		);
+};
+
+export const clearCurrentContact = () => {
+	return {
+		type: CLEAR_CURRENT_CONTACT,
+	};
+};
+
+export const editContact = (id, updateData) => (dispatch) => {
+	axios
+		.post(`/API/contacts/view/${id}`, updateData)
+		.then((res) =>
+			dispatch({
+				type: EDIT_CONTACT,
+				payload: res.data,
+			})
+		)
+		.catch((err) =>
+			dispatch(returnErrors(err.response.data, err.response.status))
+		);
+};
+
+export const clearContacts = () => {
+	return {
+		type: CLEAR_CONTACTS,
+	};
 };

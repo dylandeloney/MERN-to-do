@@ -1,8 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { getContacts, deleteContact } from "../Actions/contactActions";
+import { Modal } from "reactstrap";
+import {
+	getContacts,
+	deleteContact,
+	getSingleContact,
+	clearCurrentContact,
+	clearContacts,
+} from "../Actions/contactActions";
 import NewContactForm from "./NewContactForm";
+import EditContactForm from "./EditContactForm";
 
 const dayjs = require("dayjs");
 
@@ -10,10 +18,13 @@ function CRM() {
 	const dispatch = useDispatch();
 	const contacts = useSelector((state) => state.contact.contacts);
 	const auth = useSelector((state) => state.auth);
+	let [visible, setVisible] = useState(false);
 
 	useEffect(() => {
-		if (auth.isAuthenticated === true) {
-			dispatch(getContacts());
+		if (auth.isAuthenticated === true || visible) {
+			dispatch(getContacts(auth.user.id));
+		} else {
+			dispatch(clearContacts());
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [auth]);
@@ -22,6 +33,16 @@ function CRM() {
 		setTimeout(() => {
 			dispatch(deleteContact(id));
 		}, 500);
+	};
+
+	const toggle = (id) => {
+		console.log("toggle");
+		setVisible((visible = !visible));
+		if (visible === true) {
+			dispatch(getSingleContact(id));
+		} else {
+			dispatch(clearCurrentContact());
+		}
 	};
 
 	return (
@@ -47,8 +68,11 @@ function CRM() {
 							<td>{contacts.email}</td>
 							<td>{dayjs(contacts.lastContact).format("MM/DD/YYYY")}</td>
 							<td className="inline-flex">
+								<Modal isOpen={visible} toggle={toggle} className="p-0">
+									<EditContactForm />
+								</Modal>
 								<button
-									//onClick={() => toggle(contacts._id)}
+									onClick={() => toggle(contacts._id)}
 									className=" border-2 border-gray-600 text-gray-600 bg-white rounded-md justify-left px-2 py-2 my-2 mr-1">
 									<span>
 										<FaEdit />

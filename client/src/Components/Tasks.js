@@ -21,8 +21,11 @@ function Tasks() {
 	let [visible, setVisible] = useState(false);
 
 	useEffect(() => {
-		if (auth.isAuthenticated === true || visible) {
-			dispatch(getTasks(auth.user.id));
+		if (
+			(auth.isAuthenticated === true && auth.user._id != null) ||
+			(visible && auth.user._id != null)
+		) {
+			dispatch(getTasks(auth.user._id));
 		} else {
 			dispatch(clearTasks());
 		}

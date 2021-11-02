@@ -23,7 +23,7 @@ function CreateTaskForm() {
 			lead: e.lead,
 			description: e.description,
 			notes: e.notes,
-			creator_id: auth.user.id,
+			creator_id: auth.user._id,
 		};
 
 		dispatch(addTask(newTask));

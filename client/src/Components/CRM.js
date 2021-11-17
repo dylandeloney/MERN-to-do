@@ -8,35 +8,46 @@ import {
 	getSingleContact,
 	clearCurrentContact,
 	clearContacts,
+	unselectContact,
+	selectContact,
 } from "../Actions/contactActions";
 import NewContactForm from "./NewContactForm";
 import EditContactForm from "./EditContactForm";
+import CRMSearchBar from "./CRMSearchBar";
 
 const dayjs = require("dayjs");
 
 function CRM() {
 	const dispatch = useDispatch();
 	const contacts = useSelector((state) => state.contact.contacts);
+
 	const auth = useSelector((state) => state.auth);
 	let [visible, setVisible] = useState(false);
 
 	useEffect(() => {
-		if (auth.isAuthenticated === true || visible) {
-			dispatch(getContacts(auth.user.id));
+		if (
+			(auth.isAuthenticated === true && auth.user._id != null) ||
+			(visible && auth.user._id != null)
+		) {
+			dispatch(getContacts(auth.user._id));
 		} else {
 			dispatch(clearContacts());
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [auth]);
+	const searchedContacts = useSelector((state) =>
+		state.contact.selectedContacts.map((contact) => contact._id)
+	);
 
+	//delete button click event
 	const onDeleteClick = (id) => {
 		setTimeout(() => {
 			dispatch(deleteContact(id));
 		}, 500);
 	};
 
+	//toggle editContactForm Modal
 	const toggle = (id) => {
-		console.log("toggle");
 		setVisible((visible = !visible));
 		if (visible === true) {
 			dispatch(getSingleContact(id));
@@ -45,9 +56,18 @@ function CRM() {
 		}
 	};
 
+	const changeColor = (id) => {
+		if (searchedContacts.includes(id)) {
+			dispatch(unselectContact(id));
+		} else {
+			dispatch(selectContact(id));
+		}
+	};
+
 	return (
 		<div>
 			<NewContactForm />
+			<CRMSearchBar />
 			<table className="w-full  m-auto">
 				<thead>
 					<tr className="bg-gray-500 py-2 my-2 text-xl">
@@ -61,7 +81,13 @@ function CRM() {
 				</thead>
 				<tbody>
 					{contacts.map((contacts) => (
-						<tr key={contacts._id}>
+						<tr
+							key={contacts._id}
+							style={{
+								color: searchedContacts.includes(contacts._id) ? "blue" : "",
+							}}
+							onClick={() => changeColor(contacts._id)}
+							className="hover:bg-blue-200">
 							<td>{contacts.firstName + " " + contacts.lastName}</td>
 							<td>{contacts.occupation}</td>
 							<td>{contacts.phoneNumber}</td>

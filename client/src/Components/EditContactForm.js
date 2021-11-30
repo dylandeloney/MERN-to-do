@@ -25,7 +25,7 @@ function EditContactForm() {
 			email: e.email,
 			phoneNumber: e.phoneNumber,
 			occupation: e.occupation,
-			creator_id: auth.user.id,
+			creator_id: auth.user._id,
 		};
 
 		dispatch(editContact(newContact._id, newContact));

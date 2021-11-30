@@ -6,10 +6,9 @@ const auth = require("../../Middleware/auth");
 //Contect Model
 const Contact = require("../../Models/Contact");
 
-//{ creator_id: objectID }:userid
-router.get("/", (req, res) => {
+router.get("/:userid", (req, res) => {
 	const objectID = mongoose.Types.ObjectId(req.params.userid);
-	Contact.find()
+	Contact.find({ creator_id: objectID })
 		.sort({ lastName: 1 })
 		.then((contacts) => res.json(contacts));
 });
@@ -62,6 +61,14 @@ router.post("/view/:id", (req, res) => {
 	)
 		.then((contact) => res.json(contact))
 		.catch((err) => res.status(500).json({ success: false }));
+});
+
+router.get("/:userid/:occupation", (req, res) => {
+	const objectID = mongoose.Types.ObjectId(req.params.userid);
+	Contact.find({
+		creator_id: objectID,
+		occupation: req.params.occupation,
+	}).then((contacts) => res.json(contacts));
 });
 
 module.exports = router;

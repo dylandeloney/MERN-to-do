@@ -7,13 +7,16 @@ import {
 	CLEAR_CURRENT_CONTACT,
 	EDIT_CONTACT,
 	CLEAR_CONTACTS,
+	SEARCH_CONTACTS_BY_OCCUPATION,
+	// UNSELECT_CONTACT,
+	// SELECT_CONTACT,
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
 
-export const getContacts = () => (dispatch) => {
+export const getContacts = (id) => (dispatch) => {
 	axios
-		.get(`/API/contacts/`)
+		.get(`/API/contacts/${id}`)
 		.then((res) =>
 			dispatch({
 				type: GET_CONTACTS,
@@ -92,3 +95,31 @@ export const clearContacts = () => {
 		type: CLEAR_CONTACTS,
 	};
 };
+
+export const searchContactsByOccupation = (id, keyword) => (dispatch) => {
+	axios
+		.get(`/API/contacts/${id}/${keyword}`)
+		.then((res) =>
+			dispatch({
+				type: SEARCH_CONTACTS_BY_OCCUPATION,
+				payload: res.data,
+			})
+		)
+		.catch((err) =>
+			dispatch(returnErrors(err.response.data, err.response.status))
+		);
+};
+
+// export const unselectContact = (id) => {
+// 	return {
+// 		type: UNSELECT_CONTACT,
+// 		payload: id,
+// 	};
+// };
+
+// export const selectContact = (id) => {
+// 	return {
+// 		type: SELECT_CONTACT,
+// 		payload: id,
+// 	};
+// };

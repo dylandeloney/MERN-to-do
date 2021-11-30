@@ -29,7 +29,7 @@ function TaskCalendar() {
 	//get tasks from state
 	useEffect(() => {
 		if (auth.isAuthenticated === true) {
-			dispatch(getTasks(auth.user.id));
+			dispatch(getTasks(auth.user._id));
 		} else {
 			dispatch(clearTasks());
 		}

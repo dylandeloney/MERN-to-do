@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../Actions/contactActions";
@@ -11,7 +11,21 @@ function NewContactForm() {
 		setVisible((visible = !visible));
 	};
 
-	const { register, handleSubmit } = useForm();
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { isSubmitted },
+	} = useForm({
+		defaultValues: {
+			firstName: "",
+			lastName: "",
+			email: "",
+			phoneNumber: "",
+			occupation: "",
+			creator_id: "",
+		},
+	});
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
 
@@ -26,13 +40,28 @@ function NewContactForm() {
 		};
 
 		dispatch(addContact(newContact));
-
 		toggle();
 	};
+
+	useEffect(() => {
+		if (isSubmitted) {
+			reset({
+				firstName: "",
+				lastName: "",
+				email: "",
+				phoneNumber: "",
+				occupation: "",
+				creator_id: "",
+			});
+		}
+	}, [isSubmitted, reset]);
 
 	return (
 		<div>
 			<button
+				style={{
+					display: auth.isAuthenticated === false ? "none" : "",
+				}}
 				onClick={toggle}
 				className="float-left bg-red-400 py-2 px-4 mx-2 my-2 rounded-md">
 				New Contact
@@ -43,6 +72,7 @@ function NewContactForm() {
 				</ModalHeader>
 				<ModalBody>
 					<form
+						id="newContactForm"
 						className="bg-white rounded-lg"
 						method="post"
 						onSubmit={handleSubmit(onSubmit)}>

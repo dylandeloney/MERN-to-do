@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addTask } from "../Actions/taskActions";
@@ -12,7 +12,22 @@ function CreateTaskForm() {
 		setVisible((visible = !visible));
 	};
 
-	const { register, handleSubmit } = useForm();
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { isSubmitted },
+	} = useForm({
+		defaultValues: {
+			name: "",
+			importance: "",
+			deadline: "",
+			lead: "",
+			description: "",
+			notes: "",
+			creator_id: "",
+		},
+	});
 	const dispatch = useDispatch();
 
 	const onSubmit = (e) => {
@@ -31,9 +46,25 @@ function CreateTaskForm() {
 		toggle();
 	};
 
+	useEffect(() => {
+		if (isSubmitted) {
+			reset({
+				firstName: "",
+				lastName: "",
+				email: "",
+				phoneNumber: "",
+				occupation: "",
+				creator_id: "",
+			});
+		}
+	}, [isSubmitted, reset]);
+
 	return (
 		<div>
 			<button
+				style={{
+					display: auth.isAuthenticated === false ? "none" : "",
+				}}
 				onClick={toggle}
 				className="float-left bg-red-400 py-2 px-4 mx-2 my-2 rounded-md">
 				Create Task

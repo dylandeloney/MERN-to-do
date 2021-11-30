@@ -8,8 +8,8 @@ import {
 	EDIT_CONTACT,
 	CLEAR_CONTACTS,
 	SEARCH_CONTACTS_BY_OCCUPATION,
-	UNSELECT_CONTACT,
-	SELECT_CONTACT,
+	// UNSELECT_CONTACT,
+	// SELECT_CONTACT,
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
@@ -110,16 +110,16 @@ export const searchContactsByOccupation = (id, keyword) => (dispatch) => {
 		);
 };
 
-export const unselectContact = (id) => {
-	return {
-		type: UNSELECT_CONTACT,
-		payload: id,
-	};
-};
+// export const unselectContact = (id) => {
+// 	return {
+// 		type: UNSELECT_CONTACT,
+// 		payload: id,
+// 	};
+// };
 
-export const selectContact = (id) => {
-	return {
-		type: SELECT_CONTACT,
-		payload: id,
-	};
-};
+// export const selectContact = (id) => {
+// 	return {
+// 		type: SELECT_CONTACT,
+// 		payload: id,
+// 	};
+// };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { searchContactsByOccupation } from "../Actions/contactActions";
@@ -6,8 +6,7 @@ import { searchContactsByOccupation } from "../Actions/contactActions";
 function CRMSearchBar() {
 	const dispatch = useDispatch();
 	const { register, handleSubmit } = useForm();
-	const contacts = useSelector((state) => state.contact.contacts);
-	const auth = useSelector((state) => state.auth.user);
+	const auth = useSelector((state) => state.auth);
 
 	//create suggestion list. TBD IF NEEDED
 	// let suggestions = contacts.map((contact) => ({
@@ -18,13 +17,16 @@ function CRMSearchBar() {
 
 	//Search function
 	const onSearch = (e) => {
-		const id = auth._id;
+		const id = auth.user._id;
 		const keyword = e.keyword;
 		dispatch(searchContactsByOccupation(id, keyword));
 	};
 
 	return (
-		<div>
+		<div
+			style={{
+				display: auth.isAuthenticated === false ? "none" : "",
+			}}>
 			<form className="bg-white rounded-lg" onSubmit={handleSubmit(onSearch)}>
 				{" "}
 				<div className="formItem">

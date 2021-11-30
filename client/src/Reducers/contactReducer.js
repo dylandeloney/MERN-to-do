@@ -7,8 +7,8 @@ import {
 	EDIT_CONTACT,
 	CLEAR_CONTACTS,
 	SEARCH_CONTACTS_BY_OCCUPATION,
-	UNSELECT_CONTACT,
-	SELECT_CONTACT,
+	// UNSELECT_CONTACT,
+	// SELECT_CONTACT,
 } from "../Actions/types";
 
 const initialState = {
@@ -35,7 +35,7 @@ export default function contactReducer(state = initialState, action) {
 		case ADD_CONTACT:
 			return {
 				...state,
-				contacts: [action.payload, ...state.contacts],
+				contacts: [...state.contacts, action.payload],
 			};
 		case GET_SINGLE_CONTACT:
 			return {
@@ -60,25 +60,25 @@ export default function contactReducer(state = initialState, action) {
 			return {
 				...state,
 				contacts: [],
-				searchedContacts: [],
+				selectedContacts: [],
 			};
 		case SEARCH_CONTACTS_BY_OCCUPATION:
 			return {
 				...state,
 				selectedContacts: action.payload,
 			};
-		case UNSELECT_CONTACT:
-			return {
-				...state,
-				selectedContacts: state.selectedContacts.filter(
-					(contact) => contact._id !== action.payload
-				),
-			};
-		case SELECT_CONTACT:
-			return {
-				...state,
-				selectedContacts: [action.payload, ...state.selectedContacts],
-			};
+		// case UNSELECT_CONTACT:
+		// 	return {
+		// 		...state,
+		// 		selectedContacts: state.selectedContacts.filter(
+		// 			(contact) => contact !== action.payload
+		// 		),
+		// 	};
+		// case SELECT_CONTACT:
+		// 	return {
+		// 		...state,
+		// 		selectedContacts: [action.payload, ...state.selectedContacts],
+		// 	};
 		default:
 			return state;
 	}

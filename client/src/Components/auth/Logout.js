@@ -1,11 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../Actions/authActions";
+import { clearContacts } from "../../Actions/contactActions";
+import { clearTasks } from "../../Actions/taskActions";
 
 function Logout() {
 	const dispatch = useDispatch();
 	const onLogout = () => {
 		dispatch(logout());
+		dispatch(clearContacts());
+		dispatch(clearTasks());
 	};
 
 	return (

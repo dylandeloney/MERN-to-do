@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { ModalBody } from "reactstrap";
@@ -15,7 +15,28 @@ function EditContactForm() {
 		setDisabled((disabled = !disabled));
 	};
 
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit, reset } = useForm({
+		defaultValues: {
+			firstName: "",
+			lastName: "",
+			email: "",
+			phoneNumber: "",
+			occupation: "",
+		},
+	});
+
+	useEffect(() => {
+		if (contact.length > 0) {
+			let defaults = {
+				firstName: contact[0].firstName,
+				lastName: contact[0].lastName,
+				email: contact[0].email,
+				phoneNumber: contact[0].phoneNumber,
+				occupation: contact[0].occupation,
+			};
+			reset(defaults);
+		}
+	}, [contact, reset]);
 
 	const onSubmit = (e) => {
 		const newContact = {
@@ -60,7 +81,6 @@ function EditContactForm() {
 								type="text"
 								className="formInput formInputSmall"
 								name="firstName"
-								defaultValue={contact.firstName}
 								required={true}
 								disabled={disabled}
 							/>
@@ -77,7 +97,6 @@ function EditContactForm() {
 								type="text"
 								className="formInput  formInputSmall"
 								name="lastName"
-								defaultValue={contact.lastName}
 								required={true}
 								disabled={disabled}
 							/>
@@ -92,7 +111,6 @@ function EditContactForm() {
 								type="text"
 								className="formInput "
 								name="email"
-								defaultValue={contact.email}
 								disabled={disabled}
 							/>
 						</div>
@@ -106,7 +124,6 @@ function EditContactForm() {
 								type="text"
 								className="formInput "
 								name="phoneNumber"
-								defaultValue={contact.phoneNumber}
 								disabled={disabled}
 							/>
 						</div>
@@ -119,7 +136,6 @@ function EditContactForm() {
 								type="text"
 								className="formInput "
 								name="occupation"
-								defaultValue={contact.occupation}
 								required={true}
 								disabled={disabled}
 							/>

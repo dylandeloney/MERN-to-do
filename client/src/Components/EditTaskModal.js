@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { ModalBody } from "reactstrap";
@@ -15,12 +15,35 @@ function EditTaskModal() {
 		setDisabled((disabled = !disabled));
 	};
 
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit, reset } = useForm({
+		defaultValues: {
+			name: "",
+			importance: "",
+			deadline: "",
+			lead: "",
+			description: "",
+			notes: "",
+		},
+	});
+
+	useEffect(() => {
+		if (task.length > 0) {
+			let defaults = {
+				name: task[0].name,
+				importance: task[0].importance,
+				deadline: task[0].deadline,
+				lead: task[0].lead,
+				description: task[0].description,
+				notes: task[0].notes,
+			};
+			reset(defaults);
+		}
+	}, [task, reset]);
 
 	const onSubmit = (e) => {
 		const newTask = {
 			_id: task[0]._id,
-			name: e.projectName,
+			name: e.name,
 			importance: e.importance,
 			deadline: e.deadline,
 			lead: e.lead,
@@ -54,16 +77,15 @@ function EditTaskModal() {
 						method="post"
 						onSubmit={handleSubmit(onSubmit)}>
 						<div className="formItem">
-							<label htmlFor="projectName" className="formLabel">
+							<label htmlFor="name" className="formLabel">
 								Task Name:
 							</label>
 							<input
-								{...register("projectName")}
+								{...register("name")}
 								type="text"
 								className="formInput "
-								name="projectName"
+								name="name"
 								placeholder="Enter the name of the task"
-								defaultValue={task.name}
 								disabled={disabled}
 							/>
 							<span className="formError">A task name is required</span>
@@ -81,7 +103,6 @@ function EditTaskModal() {
 								className="formInput  formInputSmall"
 								name="importance"
 								placeholder="Enter the importance rating (1 - 10)"
-								defaultValue={task.importance}
 								disabled={disabled}
 							/>
 							<span className="formError">
@@ -99,7 +120,6 @@ function EditTaskModal() {
 								className="formInput  formInputSmall"
 								name="deadline"
 								placeholder="Enter a deadline for the task"
-								defaultValue={task.deadline}
 								disabled={disabled}
 							/>
 							<span className="formError">A deadline is required</span>
@@ -115,7 +135,6 @@ function EditTaskModal() {
 								className="formInput "
 								name="lead"
 								placeholder="Enter the name of the leader for this task"
-								defaultValue={task.lead}
 								disabled={disabled}
 							/>
 							<span className="formError">
@@ -132,7 +151,6 @@ function EditTaskModal() {
 								name="description"
 								className="formInput"
 								placeholder="Enter a description of the task"
-								defaultValue={task.description}
 								disabled={disabled}></textarea>
 						</div>
 
@@ -145,7 +163,6 @@ function EditTaskModal() {
 								name="notes"
 								className="formInput"
 								placeholder="Enter any necessary notes related to the task"
-								defaultValue={task.notes}
 								disabled={disabled}></textarea>
 						</div>
 

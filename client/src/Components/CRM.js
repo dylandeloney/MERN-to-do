@@ -71,12 +71,12 @@ function CRM() {
 					const rowId = data.row.original._id;
 					//toggle editContactForm Modal
 					const toggle = (id) => {
-						setVisible((visible = !visible));
-						if (visible === true) {
+						if (visible !== true) {
 							dispatch(getSingleContact(id));
 						} else {
 							dispatch(clearCurrentContact());
 						}
+						setVisible((visible = !visible));
 					};
 					return (
 						<div>

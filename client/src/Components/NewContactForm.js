@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../Actions/contactActions";
 import { ModalBody, Modal, ModalHeader } from "reactstrap";
+import { capitalizeFirstLetter } from "../helperFunctions";
 
 function NewContactForm() {
 	let [visible, setVisible] = useState(false);
@@ -31,11 +32,11 @@ function NewContactForm() {
 
 	const onSubmit = (e) => {
 		const newContact = {
-			firstName: e.firstName,
-			lastName: e.lastName,
+			firstName: capitalizeFirstLetter(e.firstName),
+			lastName: capitalizeFirstLetter(e.lastName),
 			email: e.email,
 			phoneNumber: e.phoneNumber,
-			occupation: e.occupation,
+			occupation: capitalizeFirstLetter(e.occupation),
 			creator_id: auth.user._id,
 		};
 

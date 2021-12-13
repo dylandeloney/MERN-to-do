@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addTask } from "../Actions/taskActions";
 import { ModalBody, Modal, ModalHeader } from "reactstrap";
+import { capitalizeFirstLetter } from "../helperFunctions";
 
 function CreateTaskForm() {
 	let [visible, setVisible] = useState(false);
@@ -32,10 +33,10 @@ function CreateTaskForm() {
 
 	const onSubmit = (e) => {
 		const newTask = {
-			name: e.projectName,
+			name: capitalizeFirstLetter(e.projectName),
 			importance: e.importance,
 			deadline: e.deadline,
-			lead: e.lead,
+			lead: capitalizeFirstLetter(e.lead),
 			description: e.description,
 			notes: e.notes,
 			creator_id: auth.user._id,

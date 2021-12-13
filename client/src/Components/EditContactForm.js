@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ModalBody } from "reactstrap";
 import { FaLock, FaLockOpen } from "react-icons/fa";
 import { editContact } from "../Actions/contactActions";
+import { capitalizeFirstLetter } from "../helperFunctions";
 
 function EditContactForm() {
 	let [disabled, setDisabled] = useState(true);
@@ -41,11 +42,11 @@ function EditContactForm() {
 	const onSubmit = (e) => {
 		const newContact = {
 			_id: contact[0]._id,
-			firstName: e.firstName,
-			lastName: e.lastName,
+			firstName: capitalizeFirstLetter(e.firstName),
+			lastName: capitalizeFirstLetter(e.lastName),
 			email: e.email,
 			phoneNumber: e.phoneNumber,
-			occupation: e.occupation,
+			occupation: capitalizeFirstLetter(e.occupation),
 			creator_id: auth.user._id,
 		};
 

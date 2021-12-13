@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ModalBody } from "reactstrap";
 import { FaLock, FaLockOpen } from "react-icons/fa";
 import { editTask } from "../Actions/taskActions";
+import { capitalizeFirstLetter } from "../helperFunctions";
 
 function EditTaskModal() {
 	let [disabled, setDisabled] = useState(true);
@@ -43,10 +44,10 @@ function EditTaskModal() {
 	const onSubmit = (e) => {
 		const newTask = {
 			_id: task[0]._id,
-			name: e.name,
+			name: capitalizeFirstLetter(e.name),
 			importance: e.importance,
 			deadline: e.deadline,
-			lead: e.lead,
+			lead: capitalizeFirstLetter(e.lead),
 			description: e.description,
 			notes: e.notes,
 			creator_id: auth.user._id,

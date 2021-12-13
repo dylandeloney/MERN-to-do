@@ -12,7 +12,6 @@ import {
 } from "../Actions/contactActions";
 import NewContactForm from "./NewContactForm";
 import EditContactForm from "./EditContactForm";
-import CRMSearchBar from "./CRMSearchBar";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { Modal } from "reactstrap";
 
@@ -112,7 +111,6 @@ function CRM() {
 	return (
 		<div>
 			<NewContactForm />
-			<CRMSearchBar />
 			<table
 				{...getTableProps()}
 				style={{ border: "solid 1px blue" }}

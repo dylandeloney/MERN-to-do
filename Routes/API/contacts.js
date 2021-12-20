@@ -25,6 +25,7 @@ router.post("/", (req, res) => {
 		phoneNumber: req.body.phoneNumber,
 		lastContact: req.body.lastContact,
 		occupation: req.body.occupation,
+		lower_occupation: req.body.lower_occupation,
 		creator_id: req.body.creator_id,
 	});
 	newContact.save().then((contact) => res.json(contact));
@@ -63,11 +64,11 @@ router.post("/view/:id", (req, res) => {
 		.catch((err) => res.status(500).json({ success: false }));
 });
 
-router.get("/:userid/:occupation", (req, res) => {
+router.get("/:userid/:lower_occupation", (req, res) => {
 	const objectID = mongoose.Types.ObjectId(req.params.userid);
 	Contact.find({
 		creator_id: objectID,
-		occupation: req.params.occupation,
+		lower_occupation: req.params.lower_occupation,
 	}).then((contacts) => res.json(contacts));
 });
 

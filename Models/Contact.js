@@ -20,6 +20,9 @@ const ContactSchema = new Schema({
 	occupation: {
 		type: String,
 	},
+	lower_occupation: {
+		type: String,
+	},
 	lastContact: {
 		type: Date,
 	},

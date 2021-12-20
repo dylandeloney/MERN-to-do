@@ -65,20 +65,9 @@ export default function contactReducer(state = initialState, action) {
 		case SEARCH_CONTACTS_BY_OCCUPATION:
 			return {
 				...state,
-				selectedContacts: action.payload,
+				contacts: action.payload,
 			};
-		// case UNSELECT_CONTACT:
-		// 	return {
-		// 		...state,
-		// 		selectedContacts: state.selectedContacts.filter(
-		// 			(contact) => contact !== action.payload
-		// 		),
-		// 	};
-		// case SELECT_CONTACT:
-		// 	return {
-		// 		...state,
-		// 		selectedContacts: [action.payload, ...state.selectedContacts],
-		// 	};
+
 		default:
 			return state;
 	}

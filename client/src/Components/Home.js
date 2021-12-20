@@ -1,7 +1,12 @@
 import React from "react";
+import CRMSearchBar from "./CRMSearchBar";
 
 function Home() {
-	return <div>home</div>;
+	return (
+		<div>
+			<CRMSearchBar />
+		</div>
+	);
 }
 
 export default Home;

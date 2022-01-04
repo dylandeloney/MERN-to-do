@@ -109,17 +109,3 @@ export const searchContactsByOccupation = (id, keyword) => (dispatch) => {
 			dispatch(returnErrors(err.response.data, err.response.status))
 		);
 };
-
-// export const unselectContact = (id) => {
-// 	return {
-// 		type: UNSELECT_CONTACT,
-// 		payload: id,
-// 	};
-// };
-
-// export const selectContact = (id) => {
-// 	return {
-// 		type: SELECT_CONTACT,
-// 		payload: id,
-// 	};
-// };

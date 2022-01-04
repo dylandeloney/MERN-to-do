@@ -36,13 +36,20 @@ function CRMSearchBar() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			<input {...register("keyword")} />
-			{toggle ? (
-				<button type="submit">Clear</button>
-			) : (
-				<button type="submit">Search</button>
-			)}
+		<form
+			style={{
+				display: auth.isAuthenticated === false ? "none" : "",
+			}}
+			onSubmit={handleSubmit(onSubmit)}
+			className="float-right   mx-2 my-2 rounded-md">
+			<input
+				{...register("keyword")}
+				className="border-2 rounded-md p-2 hover:border-blue-200"
+				placeholder="Search by occupation"
+			/>
+			<button type="submit" className="border-2 rounded-md p-2 ml-1">
+				{toggle ? "Clear" : "Search"}
+			</button>
 		</form>
 	);
 }

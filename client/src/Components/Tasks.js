@@ -12,6 +12,7 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 import { Modal } from "reactstrap";
 import CreateTaskForm from "./CreateTaskForm";
 import EditTaskModal from "./EditTaskModal";
+var dayjs = require("dayjs");
 
 function Tasks() {
 	const dispatch = useDispatch();
@@ -50,7 +51,8 @@ function Tasks() {
 			},
 			{
 				Header: "Deadline",
-				accessor: "deadline",
+				accessor: (row) =>
+					dayjs(row.deadline).add(1, "day").format("MM/DD/YYYY"),
 			},
 			{
 				Header: "Lead",

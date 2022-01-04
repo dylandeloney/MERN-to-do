@@ -5,6 +5,7 @@ import { ModalBody } from "reactstrap";
 import { FaLock, FaLockOpen } from "react-icons/fa";
 import { editTask } from "../Actions/taskActions";
 import { capitalizeFirstLetter } from "../helperFunctions";
+var dayjs = require("dayjs");
 
 function EditTaskModal() {
 	let [disabled, setDisabled] = useState(true);
@@ -32,7 +33,7 @@ function EditTaskModal() {
 			let defaults = {
 				name: task[0].name,
 				importance: task[0].importance,
-				deadline: task[0].deadline,
+				deadline: dayjs(task[0].deadline).add(1, "day").format("YYYY-MM-DD"),
 				lead: task[0].lead,
 				description: task[0].description,
 				notes: task[0].notes,

@@ -56,6 +56,7 @@ router.post("/view/:id", (req, res) => {
 			phoneNumber: req.body.phoneNumber,
 			lastContact: req.body.lastContact,
 			occupation: req.body.occupation,
+			lower_occupation: req.body.lower_occupation,
 			creator_id: req.body.creator_id,
 		},
 		{ new: true, useFindAndModify: false }

@@ -47,6 +47,7 @@ function EditContactForm() {
 			email: e.email,
 			phoneNumber: e.phoneNumber,
 			occupation: capitalizeFirstLetter(e.occupation),
+			lower_occupation: e.occupation.toLowerCase(),
 			creator_id: auth.user._id,
 		};
 

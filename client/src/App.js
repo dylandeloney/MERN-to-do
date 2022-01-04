@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./Components/Navbar";
-import Home from "./Components/Home";
 import CRM from "./Components/CRM";
 import TaskCalendar from "./Components/TaskCalendar.js";
 import Tasks from "./Components/Tasks";
@@ -26,7 +25,6 @@ function App() {
 				<div className="container">
 					{
 						<Switch>
-							<Route component={Home} path="/" exact />
 							<Route component={CRM} path="/crm" />
 							<Route component={TaskCalendar} path="/calendar" />
 							<Route component={Tasks} path="/tasks" />

@@ -35,11 +35,11 @@
 	transition: background 0.25s, border-color 0.25s, color 0.25s;
 }
 
-.forminput: focus {
+/* .forminput: focus {
 	background: #ffffff;
-}
+} */
 
-.formInputError {
+/* .formInputError {
 	color: #d50000;
 	background: #fff8f8;
 	border-color: #d50000;
@@ -58,7 +58,7 @@
 .formInputError + .formError {
 	visibility: visible;
 }
-
+*/
 .formInputSmall {
 	max-width: 275px;
 }

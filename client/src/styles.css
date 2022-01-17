@@ -42,9 +42,9 @@
 	border-color: #d50000;
 }
 
-.formInputError:: placeholder {
+/* .formInputError:: placeholder {
 	color: #ffbfbf;
-}
+} */
 .formError {
 	padding-top: 10px;
 	color: #d50000;

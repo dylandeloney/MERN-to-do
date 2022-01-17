@@ -72,7 +72,7 @@ function LoginModal() {
 								type="text"
 								className="formInput "
 								name="email"
-								placeholder="Please enter your email"
+								placeholder=" Please enter your email"
 							/>
 						</div>
 
@@ -85,7 +85,7 @@ function LoginModal() {
 								type="text"
 								className="formInput "
 								name="password"
-								placeholder="Please enter your password"
+								placeholder=" Please enter your password"
 							/>
 						</div>
 						<ModalFooter>

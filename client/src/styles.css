@@ -24,10 +24,8 @@
 
 	/* Fix safari date fields */
 	min-height: calc(0.9em + (0.8em * 2) + 0.6em);
-
-	padding: 0.8em;
+	margin-bottom: 1rem;
 	font-size: 0.9em;
-
 	outline: none;
 	border: 1px solid #dddddd;
 	border-radius: 4px;
@@ -35,11 +33,10 @@
 	transition: background 0.25s, border-color 0.25s, color 0.25s;
 }
 
-/* .forminput: focus {
+.forminput: focus {
 	background: #ffffff;
-} */
-
-/* .formInputError {
+}
+*/ .formInputError {
 	color: #d50000;
 	background: #fff8f8;
 	border-color: #d50000;
@@ -58,7 +55,7 @@
 .formInputError + .formError {
 	visibility: visible;
 }
-*/
+
 .formInputSmall {
 	max-width: 275px;
 }

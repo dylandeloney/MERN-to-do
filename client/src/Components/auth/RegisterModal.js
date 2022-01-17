@@ -98,7 +98,6 @@ function RegisterModal() {
 								name="registerUsername"
 								placeholder="Please enter your name"
 							/>
-							<span className="formError">A name is required</span>
 						</div>
 
 						<div className="formItem">
@@ -112,9 +111,6 @@ function RegisterModal() {
 								name="registerEmail"
 								placeholder="Please enter your email"
 							/>
-							<span className="formError">
-								A valid email address is required
-							</span>
 						</div>
 
 						<div className="formItem">
@@ -128,7 +124,6 @@ function RegisterModal() {
 								name="registerPassword"
 								placeholder="Please enter your password"
 							/>
-							<span className="formError">A password is required</span>
 						</div>
 					</ModalBody>
 					<ModalFooter>

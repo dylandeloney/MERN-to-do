@@ -74,9 +74,6 @@ function LoginModal() {
 								name="email"
 								placeholder="Please enter your email"
 							/>
-							<span className="formError">
-								A valid email address is required
-							</span>
 						</div>
 
 						<div className="formItem">
@@ -90,7 +87,6 @@ function LoginModal() {
 								name="password"
 								placeholder="Please enter your password"
 							/>
-							<span className="formError">A password is required</span>
 						</div>
 						<ModalFooter>
 							{/* import nested modal (register modal) */}

@@ -87,6 +87,7 @@ function RegisterModal() {
 						{error.msg.message ? (
 							<Alert color="danger">{error.msg.message}</Alert>
 						) : null}
+
 						<div className="formItem">
 							<label htmlFor="registerUsername" className="formLabel">
 								Name:
@@ -106,7 +107,8 @@ function RegisterModal() {
 							</label>
 							<input
 								{...register("registerEmail")}
-								type="text"
+								required="true"
+								type="email"
 								className="formInput "
 								name="registerEmail"
 								placeholder="Please enter your email"
@@ -119,7 +121,8 @@ function RegisterModal() {
 							</label>
 							<input
 								{...register("registerPassword")}
-								type="text"
+								required="true"
+								type="password"
 								className="formInput "
 								name="registerPassword"
 								placeholder="Please enter your password"

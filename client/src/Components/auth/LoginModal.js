@@ -69,7 +69,8 @@ function LoginModal() {
 							</label>
 							<input
 								{...register("email")}
-								type="text"
+								required="true"
+								type="email"
 								className="formInput "
 								name="email"
 								placeholder=" Please enter your email"
@@ -82,7 +83,8 @@ function LoginModal() {
 							</label>
 							<input
 								{...register("password")}
-								type="text"
+								required="true"
+								type="password"
 								className="formInput "
 								name="password"
 								placeholder=" Please enter your password"
